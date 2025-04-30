@@ -1,0 +1,28 @@
+# Dependency directories
+node_modules/
+
+# Vite cache
+.vite/
+.vite-temp/
+
+# macOS system files
+.DS_Store
+
+# Log files
+*.log
+
+# Environment variables
+.env
+.env.*.local
+
+# IDE/editor settings
+.vscode/
+.idea/
+
+# Output build (if you run `vite build`)
+dist/
+
+# Optional OS or temp files
+Thumbs.db
+*.swp
+*.swo
