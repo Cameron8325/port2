@@ -1,88 +1,136 @@
+import useScrollReveal from "../hooks/useScrollReveal";
+
 export default function About() {
-    return (
-      <section className="space-y-20 max-w-4xl mx-auto">
+  const [introRef, introVisible] = useScrollReveal();
+  const [valuesRef, valuesVisible] = useScrollReveal(150);
+  const [howRef, howVisible] = useScrollReveal(300);
+  const [stackRef, stackVisible] = useScrollReveal(450);
+  const [ctaRef, ctaVisible] = useScrollReveal(600);
+
+  const coreValues = [
+    {
+      title: "Clarity Over Complexity",
+      text: "I aim to build systems that anyone on the team can understand, extend, or debug. The focus is on maintainable architecture, not just clever code.",
+    },
+    {
+      title: "Purpose-Driven Work",
+      text: "I want to solve real problems. Repetition without impact drains me. I care about building tools that improve how someone works, decides, or collaborates.",
+    },
+    {
+      title: "Precision Over Assumption",
+      text: "I don’t memorize everything. That’s not my strength. But I ask the questions that surface the real gaps — the kind that make products more robust and less brittle.",
+    },
+    {
+      title: "People-First Development",
+      text: "Code is only as good as the experience it creates. I care deeply about performance, UX, and how it actually feels to use what I build.",
+    },
+  ];
+
+  const techStack = [
+    "JavaScript", "Python", "React", "Django", "PostgreSQL",
+    "REST APIs", "Stripe", "AWS (S3, EC2)", "Git & GitHub"
+  ];
+
+  return (
+    <>
+      {/* fixed dark bg under header (3rem) */}
+      <div className="fixed inset-x-0 top-12 bottom-0 -z-10 bg-[#0a0e1a]" />
+
+      {/* scrolling content */}
+      <section className="relative z-10 max-w-5xl mx-auto px-6 py-20 space-y-24 text-[#e0e6ed] min-h-[calc(100vh-3rem)]">
+        {/* blob scrolls away */}
+        <div
+          className="absolute top-[-100px] right-[-150px] w-[400px] h-[400px] \
+                     bg-[#00ffe0] opacity-20 blur-3xl rounded-full animate-pulse-slow"
+        />
+
         {/* Intro */}
-        <div className="space-y-6">
-          <h2 className="text-4xl font-bold">👋 About Me</h2>
-          <p>
-            I’m <strong>Cameron Smith</strong> — a full-stack web developer with a background in QA, IT support, and operations.
-            I specialize in building software systems that solve real-world problems — apps that are clean, scalable, and used by real people every day.
+        <div
+          ref={introRef}
+          className={`text-center space-y-6 transition-opacity duration-700 ${introVisible ? "animate-fade-up" : "opacity-0"}`}
+        >
+          <h2 className="text-5xl font-extrabold">👋 About Me</h2>
+          <p className="text-lg text-[#94a3b8] max-w-3xl mx-auto">
+            I’m <strong>Cameron Smith</strong>, a full-stack web developer with a background in QA, IT operations, and technical support.
           </p>
-          <p>
-            I thrive when engineering backend logic and clean UIs that make workflows easier — whether it’s for clients scheduling services,
-            or managers streamlining their business processes.
+          <p className="text-lg max-w-3xl mx-auto">
+            I build real-world systems that reduce complexity and help teams move faster. These are tools that are clean, scalable, and used by real people every day.
           </p>
-          <p className="text-[#94a3b8] italic">
-            My goal? To join a team that values thoughtful engineering and meaningful contribution over flash or hype.
+          <p className="text-lg max-w-3xl mx-auto">
+            My work is rooted in systems thinking. I don’t just write code. I design workflows. Whether it’s client scheduling platforms or backend logic that automates business processes, I thrive at the intersection of structure and usability.
+          </p>
+          <p className="text-lg max-w-3xl mx-auto">
+            What drew me to software development is the same thing that drew me to language. It’s translation. It’s puzzle-solving. It’s how abstract ideas become tangible tools that support others. That mindset — clear, purposeful, and people-first — is what shapes how I build.
           </p>
         </div>
-  
-        {/* Values Grid */}
-        <div>
-          <h3 className="text-2xl font-semibold mb-4">💡 Core Values</h3>
+
+        {/* Core Values */}
+        <div
+          ref={valuesRef}
+          className={`transition-opacity duration-700 ${valuesVisible ? "animate-fade-up" : "opacity-0"}`}
+        >
+          <h3 className="text-3xl font-bold mb-10 text-center">💡 Core Values</h3>
           <div className="grid sm:grid-cols-2 gap-6">
-            <div className="bg-[#1e293b] p-5 rounded-xl shadow">
-              <h4 className="font-semibold text-lg">Systems Thinking</h4>
-              <p className="text-[#94a3b8] text-sm">
-                I break problems into parts and build solutions from the bottom up. I don't just build — I design workflows.
-              </p>
-            </div>
-            <div className="bg-[#1e293b] p-5 rounded-xl shadow">
-              <h4 className="font-semibold text-lg">Reliability</h4>
-              <p className="text-[#94a3b8] text-sm">
-                I design features that don’t break under pressure — code that can evolve without crumbling.
-              </p>
-            </div>
-            <div className="bg-[#1e293b] p-5 rounded-xl shadow">
-              <h4 className="font-semibold text-lg">Transparency</h4>
-              <p className="text-[#94a3b8] text-sm">
-                I'm upfront about my strengths, my learning edges, and how I communicate while solving problems.
-              </p>
-            </div>
-            <div className="bg-[#1e293b] p-5 rounded-xl shadow">
-              <h4 className="font-semibold text-lg">People-First Dev</h4>
-              <p className="text-[#94a3b8] text-sm">
-                I focus on building tools that support people — not just impress devs. UX, performance, and purpose matter.
-              </p>
-            </div>
+            {coreValues.map((val, i) => (
+              <div
+                key={i}
+                style={{ animationDelay: `${i * 100}ms` }}
+                className={`bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-xl opacity-0 ${valuesVisible ? "animate-fade-up" : ""}`}
+              >
+                <h4 className="font-semibold text-lg text-[#00ffe0]">{val.title}</h4>
+                <p className="text-[#cbd5e1] text-sm mt-2">{val.text}</p>
+              </div>
+            ))}
           </div>
         </div>
-  
-        {/* Skills */}
-        <div>
-          <h3 className="text-2xl font-semibold mb-4">🛠 Technical Stack</h3>
+
+        {/* How I Work */}
+        <div
+          ref={howRef}
+          className={`space-y-6 text-[#cbd5e1] text-lg transition-opacity duration-700 ${howVisible ? "animate-fade-up" : "opacity-0"}`}
+        >
+          <h3 className="text-3xl font-bold text-center">🧭 How I Work</h3>
+          <p>The beginning of any project is my favorite phase. That’s the moment when everything is still loose and full of potential. That’s when real architecture takes shape.</p>
+          <p>I ask questions. I challenge assumptions — not to be difficult, but to make sure we’re solving the right problems.</p>
+          <p>I’ve learned to slow down, break things into atoms, and simplify. That approach has helped me write better software, manage my ADD, and build systems that last.</p>
+          <p>When I join a team, I bring momentum: making things feel easier, clearer, and finally click into place. That’s the kind of developer and teammate I strive to be.</p>
+        </div>
+
+        {/* Technical Stack */}
+        <div
+          ref={stackRef}
+          className={`transition-opacity duration-700 ${stackVisible ? "animate-fade-up" : "opacity-0"}`}
+        >
+          <h3 className="text-3xl font-bold mb-8 text-center">🛠 Technical Stack</h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm text-[#f1f5f9]">
-            <div className="bg-[#0f172a] p-2 rounded text-center">JavaScript</div>
-            <div className="bg-[#0f172a] p-2 rounded text-center">Python</div>
-            <div className="bg-[#0f172a] p-2 rounded text-center">React</div>
-            <div className="bg-[#0f172a] p-2 rounded text-center">Django</div>
-            <div className="bg-[#0f172a] p-2 rounded text-center">PostgreSQL</div>
-            <div className="bg-[#0f172a] p-2 rounded text-center">Stripe</div>
-            <div className="bg-[#0f172a] p-2 rounded text-center">AWS (S3, EC2)</div>
-            <div className="bg-[#0f172a] p-2 rounded text-center">REST APIs</div>
-            <div className="bg-[#0f172a] p-2 rounded text-center">Git & GitHub</div>
+            {techStack.map((tech, i) => (
+              <div
+                key={tech}
+                style={{ animationDelay: `${i * 75}ms` }}
+                className={`bg-white/5 backdrop-blur-sm border border-white/10 p-3 rounded text-center opacity-0 ${stackVisible ? "animate-fade-up" : ""}`}
+              >
+                {tech}
+              </div>
+            ))}
           </div>
         </div>
-  
-        {/* Resume */}
-        <div className="text-center">
+
+        {/* Resume CTA */}
+        <div
+          ref={ctaRef}
+          className={`text-center transition-opacity duration-700 ${ctaVisible ? "animate-fade-up" : "opacity-0"}`}
+        >
+          <p className="text-[#94a3b8] text-sm mb-4">
+            Download my resume to learn more about my technical experience and current projects.
+          </p>
           <a
             href="/Cameron_Smith_Resume.pdf"
-            className="inline-block border border-[#14b8a6] px-6 py-3 rounded-xl text-[#14b8a6] hover:bg-[#14b8a6] hover:text-white transition"
+            className="inline-block border-2 border-[#14b8a6] text-[#14b8a6] text-lg font-semibold px-8 py-4 rounded-xl hover:bg-[#14b8a6] hover:text-[#0a0e1a] transition"
           >
-            Download Full Resume
+            Download Resume
           </a>
         </div>
-  
-        {/* Optional Future Footer CTA */}
-        {/* <div className="text-center text-sm text-[#94a3b8] mt-12">
-          Want to talk shop? I’d love to collaborate on smart tools and real-world systems.
-          <br />
-          <span className="block mt-2">
-            (Contact form coming soon...)
-          </span>
-        </div> */}
       </section>
-    );
-  }
-  
+    </>
+  );
+}
