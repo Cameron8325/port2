@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SpaceMap from "../assets/space.svg?react";
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
                    flex items-center justify-center
                    overflow-visible px-6"
       >
-        {/* blob scrolls away */}
+        {/* glowing blob (top-right) */}
         <div
           className="
             absolute top-[-100px] right-[-150px]
@@ -55,9 +56,18 @@ export default function Home() {
               </Link>
             </div>
           </div>
+
+          {/* System Map Animation */}
           <div className="hidden md:flex justify-center items-center">
-            <div className="w-80 h-80 bg-[#0f172a] rounded-full flex items-center justify-center text-[#94a3b8] text-xl">
-              Animated Graphic Coming
+            <div className="relative w-[420px] h-[420px] flex items-center justify-center">
+              {/* glow ring exactly 0 inset */}
+              <div className="absolute inset-0 rounded-full ring-2 ring-[#00ffe0]/20 blur-md animate-pulse-slow pointer-events-none" />
+
+              {/* SVG shifted by +5.556% on both axes to recentre its circles */}
+              <SpaceMap
+                className="absolute inset-0 w-full h-full transform
+                           translate-x-[5.556%] translate-y-[5.556%]"
+              />
             </div>
           </div>
         </div>
