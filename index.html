@@ -4,7 +4,30 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>Cameron Smith | Engineer First Developer Second</title>
+
+    <!-- Preload main CSS bundle -->
+    <link rel="preload" href="/src/index.css" as="style" />
+    <link rel="stylesheet" href="/src/index.css" />
+
+    <!-- Inline critical CSS for above-the-fold content -->
+    <style>
+      /* Visually hidden skip-link */
+      .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+      .focus:not(.sr-only) { position:static; width:auto; height:auto; margin:0; overflow:visible; clip:auto; white-space:normal; }
+      /* Fixed background under navbar */
+      body { margin:0; background-color:#0a0e1a; }
+      /* Skip-link focus state */
+      a:focus { outline:2px solid #00ffe0; }
+      /* Hero heading text */
+      #hero-heading { font-size:2rem; font-weight:800; line-height:1.1; }
+      /* CTA buttons above fold */
+      .btn-primary { background-color:#00ffe0; color:#0a0e1a; padding:1rem 2rem; border-radius:0.75rem; }
+      .btn-secondary { border:2px solid #a78bfa; color:#a78bfa; padding:1rem 2rem; border-radius:0.75rem; }
+    </style>
+
+    <!-- Preload fonts (if added later) -->
+    <!-- <link rel="preload" as="font" href="/fonts/YourFont.woff2" type="font/woff2" crossorigin /> -->
   </head>
   <body>
     <div id="root"></div>

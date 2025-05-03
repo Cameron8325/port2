@@ -1,36 +1,53 @@
-import useScrollReveal from "../hooks/useScrollReveal";
+import React from 'react';
+import useScrollReveal from '../hooks/useScrollReveal';
 
 export default function Contact() {
   const [cardRef, isVisible] = useScrollReveal();
 
   return (
     <>
-      {/* fixed dark bg under navbar (3rem height) */}
-      <div className="fixed inset-x-0 top-12 bottom-0 -z-10 bg-[#0a0e1a]" />
+      {/* Skip link for accessibility */}
+      <a
+        href="#contact-content"
+        className="sr-only focus:not-sr-only absolute top-2 left-2 z-20 p-2 bg-[#00ffe0] text-[#0a0e1a] rounded"
+      >
+        Skip to contact content
+      </a>
 
-      <section className="relative z-10 min-h-[calc(100vh-3rem)] px-6 py-20 overflow-visible">
-        {/* Top-right glow blob */}
+      {/* fixed dark background under navbar */}
+      <div
+        className="fixed inset-x-0 top-12 bottom-0 -z-10 bg-[#0a0e1a]"
+        aria-hidden="true"
+      />
+
+      <main
+        id="contact-content"
+        role="main"
+        aria-labelledby="contact-heading"
+        className="relative z-10 min-h-[calc(100vh-3rem)] px-6 py-20 overflow-visible"
+      >
+        {/* Top-right decorative glow blob */}
         <div
-          className="
-            absolute top-[-100px] right-[-150px]
-            w-[400px] h-[400px]
-            bg-[#00ffe0] opacity-20 blur-3xl rounded-full
-            animate-pulse-slow
-          "
+          className="absolute top-[-100px] right-[-150px] w-[400px] h-[400px] bg-[#00ffe0] opacity-20 blur-3xl rounded-full"
+          aria-hidden="true"
         />
 
-        {/* Scroll-revealed Contact Card */}
-        <div
+        <article
           ref={cardRef}
           className={`relative z-10 max-w-xl mx-auto bg-white/5 backdrop-blur-sm ring-1 ring-white/10 rounded-2xl shadow-inner p-10 space-y-8 text-center transition-opacity duration-700 ${
-            isVisible ? "animate-fade-up" : "opacity-0"
+            isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'
           }`}
+          aria-labelledby="contact-heading"
         >
-          <h2 className="text-5xl font-extrabold">📬 Contact</h2>
+          <header>
+            <h2 id="contact-heading" className="text-5xl font-extrabold">
+              📬 Contact
+            </h2>
+          </header>
 
           <p className="text-lg text-[#94a3b8]">
-            Want to collaborate, hire, or ask a question? I'm open to freelance,
-            full-time, and creative technical work.
+            Want to collaborate, hire, or ask a question? I'm open to freelance, full-time,
+            and creative technical work.
           </p>
 
           <p className="text-xl font-medium">
@@ -69,8 +86,8 @@ export default function Contact() {
               Download Resume
             </a>
           </div>
-        </div>
-      </section>
+        </article>
+      </main>
     </>
   );
 }
