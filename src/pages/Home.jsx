@@ -83,13 +83,9 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Orbit Map with perfect glow ring */}
+          {/* Orbit Map (ring removed) */}
           <div className="hidden md:flex justify-center items-center">
             <div className="relative w-[520px] h-[520px] flex items-center justify-center">
-              <div
-                className="absolute inset-0 rounded-full ring-[3px] ring-[#00ffe0]/30 blur-lg pointer-events-none"
-                aria-hidden="true"
-              />
               <SpaceMap className="absolute inset-0 w-full h-full" />
             </div>
           </div>
