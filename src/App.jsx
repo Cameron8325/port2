@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
+import Starfield from './components/Starfield';
 
 // Route-level code splitting via React.lazy
 const Home = lazy(() => import('./pages/Home'));
@@ -15,6 +16,7 @@ function App() {
     <Router>
       <ScrollToTop />
       <Layout>
+        <Starfield/>
         {/* Suspense wraps routes for lazy-loading fallback */}
         <Suspense fallback={<div className="flex justify-center items-center min-h-screen text-lg text-[#94a3b8]">Loading...</div>}>
           <Routes>

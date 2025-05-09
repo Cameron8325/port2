@@ -29,8 +29,6 @@ export default function ProjectDetail() {
         Skip to project content
       </a>
 
-      {/* fixed dark bg under navbar (3rem height) */}
-      <div className="fixed inset-x-0 top-12 bottom-0 -z-10 bg-[#0a0e1a]" aria-hidden="true" />
 
       <main
         id="project-content"

@@ -34,8 +34,6 @@ export default function About() {
 
   return (
     <>
-      {/* fixed dark bg under header (3rem) */}
-      <div className="fixed inset-x-0 top-12 bottom-0 -z-10 bg-[#0a0e1a]" aria-hidden="true" />
 
       <main
         id="main-content"
