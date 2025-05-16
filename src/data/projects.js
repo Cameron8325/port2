@@ -55,7 +55,7 @@ const projects = [
         image: nelson,
         description:
             "Freelance portfolio site for an insurance broker. Responsive layout, brand-focused, and conversion-ready.",
-        stack: ["HTML", "CSS", "JavaScript"],
+        stack: ["React", "styled-components", "react-scroll"],
         link: "https://platnelson.netlify.app/",
         code: "https://github.com/Cameron8325/plat-nelson", // replace if public
         status: "Freelance project (public)",
