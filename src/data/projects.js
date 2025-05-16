@@ -1,9 +1,13 @@
+import artifex1 from "../assets/artifex1.jpg";
+import imagine1 from "../assets/imagine1.jpg";
+import nelson from "../assets/nelson.png"
+
 const projects = [
     {
         title: "Ceremonial Artifex Scheduler",
         slug: "artifex-scheduler",
         type: "Client-Facing Application", // NEW
-        image: "https://placehold.co/600x400?text=Artifex+Scheduler",
+        image: artifex1,
         description: "Online appointment and loyalty system for a ceremonial tea business.",
         stack: ["React", "Django", "PostgreSQL", "Stripe", "AWS"],
         link: "#", // TODO: replace when live
@@ -26,7 +30,7 @@ const projects = [
         title: "The Imaginarium Internal Scheduler",
         slug: "imaginarium-scheduler",
         type: "Employee-Facing Internal Tool", // NEW
-        image: "https://placehold.co/600x400?text=Imaginarium+Scheduler",
+        image: imagine1,
         description: "Internal employee management and scheduling tool for a tattoo studio.",
         stack: ["React", "Django", "PostgreSQL"],
         link: "#",
@@ -48,7 +52,7 @@ const projects = [
     {
         title: "Brett Nelson Portfolio",
         slug: "nelson-port",
-        image: "https://placehold.co/600x400?text=PlatNelson.netlify.app",
+        image: nelson,
         description:
             "Freelance portfolio site for an insurance broker. Responsive layout, brand-focused, and conversion-ready.",
         stack: ["HTML", "CSS", "JavaScript"],
