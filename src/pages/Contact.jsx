@@ -18,33 +18,33 @@ export default function Contact() {
         id="contact-content"
         role="main"
         aria-labelledby="contact-heading"
-        className="relative z-10 min-h-[calc(100vh-3rem)] px-6 py-20 overflow-visible"
+        className="relative z-10 min-h-[calc(100vh-3rem)] px-4 sm:px-6 lg:px-8 py-16 sm:py-20 overflow-visible"
       >
         {/* Top-right decorative glow blob */}
         <div
-          className="absolute top-[-100px] right-[-150px] w-[400px] h-[400px] bg-[#00ffe0] opacity-20 blur-3xl rounded-full"
+          className="absolute top-[-100px] right-[-150px] w-[400px] h-[400px] bg-[#00ffe0] opacity-20 blur-3xl rounded-full sm:w-[400px] sm:h-[400px]"
           aria-hidden="true"
         />
 
         <article
           ref={cardRef}
-          className={`relative z-10 max-w-xl mx-auto bg-white/5 backdrop-blur-sm ring-1 ring-white/10 rounded-2xl shadow-inner p-10 space-y-8 text-center transition-opacity duration-700 ${
+          className={`relative z-10 max-w-md sm:max-w-xl mx-auto bg-white/5 backdrop-blur-sm ring-1 ring-white/10 rounded-2xl shadow-inner p-6 sm:p-10 space-y-6 text-center transition-opacity duration-700 ${
             isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'
           }`}
           aria-labelledby="contact-heading"
         >
           <header>
-            <h2 id="contact-heading" className="text-5xl font-extrabold">
+            <h2 id="contact-heading" className="text-4xl sm:text-5xl font-extrabold">
               📬 Contact
             </h2>
           </header>
 
-          <p className="text-lg text-[#94a3b8]">
-            Want to collaborate, hire, or ask a question? I'm open to freelance, full-time,
-            and creative technical work.
+          <p className="text-base sm:text-lg text-[#94a3b8]">
+            Want to collaborate, hire, or ask a question? I'm open to freelance,
+            full-time, and creative technical work.
           </p>
 
-          <p className="text-xl font-medium">
+          <p className="text-lg sm:text-xl font-medium">
             <a
               href="mailto:cameron8325@gmail.com"
               className="text-[#00ffe0] hover:underline"
@@ -53,7 +53,7 @@ export default function Contact() {
             </a>
           </p>
 
-          <div className="flex justify-center gap-6 text-sm text-[#a78bfa] font-semibold">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 text-sm sm:text-base text-[#a78bfa] font-semibold">
             <a
               href="https://github.com/Cameron8325"
               target="_blank"
@@ -75,7 +75,7 @@ export default function Contact() {
           <div>
             <a
               href="/Cameron_Smith_Resume.pdf"
-              className="inline-block border-2 border-[#14b8a6] text-[#14b8a6] text-lg font-semibold px-8 py-4 rounded-xl hover:bg-[#14b8a6] hover:text-[#0a0e1a] transition"
+              className="inline-block border-2 border-[#14b8a6] text-[#14b8a6] text-base sm:text-lg font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-[#14b8a6] hover:text-[#0a0e1a] transition"
             >
               Download Resume
             </a>

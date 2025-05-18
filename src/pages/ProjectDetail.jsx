@@ -29,16 +29,15 @@ export default function ProjectDetail() {
         Skip to project content
       </a>
 
-
       <main
         id="project-content"
         role="main"
         aria-labelledby="project-title"
-        className="relative z-10 min-h-[calc(100vh-3rem)] px-6 py-20 overflow-visible"
+        className="relative z-10 min-h-[calc(100vh-3rem)] px-4 sm:px-6 lg:px-8 pt-10 pb-16 overflow-visible"
       >
         {/* Consistent decorative glow blob */}
         <div
-          className="absolute top-[-100px] right-[-150px] w-[400px] h-[400px] bg-[#00ffe0] opacity-20 blur-3xl rounded-full"
+          className="absolute top-[-100px] right-[-150px] w-[400px] h-[400px] bg-[#00ffe0] opacity-20 blur-3xl rounded-full sm:w-[400px] sm:h-[400px]"
           aria-hidden="true"
         />
 
@@ -49,18 +48,18 @@ export default function ProjectDetail() {
 
           <article className="space-y-6">
             <header>
-              <h2 id="project-title" className="text-4xl font-bold">
+              <h2 id="project-title" className="text-3xl sm:text-4xl md:text-5xl font-bold">
                 {title}
               </h2>
-              <p className="text-sm text-[#94a3b8]">{type}</p>
-              <p className="text-[#94a3b8] italic">{status}</p>
+              <p className="text-sm sm:text-base text-[#94a3b8]">{type}</p>
+              <p className="text-sm sm:text-base text-[#94a3b8] italic">{status}</p>
             </header>
 
             <img
               src={image}
               alt={title}
               loading="lazy"
-              className="w-full rounded shadow"
+              className="w-full rounded shadow object-cover"
             />
 
             <section aria-labelledby="description-heading">
@@ -71,12 +70,12 @@ export default function ProjectDetail() {
             </section>
 
             <section aria-labelledby="stack-heading">
-              <h3 id="stack-heading" className="text-2xl font-semibold">
+              <h3 id="stack-heading" className="text-xl sm:text-2xl font-semibold">
                 🛠 Tech Stack
               </h3>
-              <ul role="list" className="flex flex-wrap gap-3 mt-4">
+              <ul role="list" className="flex flex-wrap gap-2 sm:gap-3 mt-4">
                 {stack.map((tech, idx) => (
-                  <li key={idx} className="bg-[#0f172a] text-[#14b8a6] text-xs px-3 py-1 rounded-full">
+                  <li key={idx} className="bg-[#0f172a] text-[#14b8a6] text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full">
                     {tech}
                   </li>
                 ))}
@@ -85,7 +84,7 @@ export default function ProjectDetail() {
 
             {details && (
               <section aria-labelledby="details-heading">
-                <h3 id="details-heading" className="text-2xl font-semibold">
+                <h3 id="details-heading" className="text-xl sm:text-2xl font-semibold">
                   📖 Case Study
                 </h3>
                 <div className="space-y-4 text-[#cbd5e1]">
@@ -121,13 +120,13 @@ export default function ProjectDetail() {
               </section>
             )}
 
-            <section className="flex gap-4 mt-8">
+            <section className="flex flex-col sm:flex-row gap-4 mt-8">
               {link && link !== '#' && (
                 <a
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#6366f1] text-white px-5 py-2 rounded-lg hover:bg-[#4f46e5]"
+                  className="bg-[#6366f1] text-white text-sm sm:text-base px-4 sm:px-5 py-2 rounded-lg hover:bg-[#4f46e5]"
                 >
                   View Live
                 </a>
@@ -137,7 +136,7 @@ export default function ProjectDetail() {
                   href={code}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border border-[#14b8a6] text-[#14b8a6] px-5 py-2 rounded-lg hover:bg-[#14b8a6] hover:text-white"
+                  className="border border-[#14b8a6] text-[#14b8a6] text-sm sm:text-base px-4 sm:px-5 py-2 rounded-lg hover:bg-[#14b8a6] hover:text-white"
                 >
                   View Code
                 </a>

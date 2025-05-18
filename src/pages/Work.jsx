@@ -16,21 +16,18 @@ export default function Work() {
         Skip to work content
       </a>
 
-
-
       <main
         id="work-content"
         role="main"
         aria-labelledby="work-heading"
         ref={sectionRef}
-        className="relative z-10 min-h-[calc(100vh-3rem)] px-6 py-20 overflow-visible"
+        className="relative z-10 min-h-[calc(100vh-3rem)] px-4 sm:px-6 lg:px-8 pt-10 pb-16 overflow-visible"
       >
-
-        {/* Decorative glow blob */}  
-<div  
-  className="absolute top-[-100px] right-[-150px] w-[400px] h-[400px] bg-[#00ffe0] opacity-20 blur-3xl rounded-full"  
-  aria-hidden="true"  
-/>
+        {/* Decorative glow blob */}
+        <div
+          className="absolute top-[-100px] right-[-150px] w-[400px] h-[400px] bg-[#00ffe0] opacity-20 blur-3xl rounded-full sm:h-[400px]"
+          aria-hidden="true"
+        />
 
         <header
           id="work-heading"
@@ -38,13 +35,13 @@ export default function Work() {
             isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'
           }`}
         >
-          <h2 className="text-5xl font-extrabold">💼 Work</h2>
-          <p className="text-lg text-[#94a3b8]">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold">💼 Work</h2>
+          <p className="text-base sm:text-lg text-[#94a3b8]">
             A collection of systems I’ve built—internal tools, client platforms, and public-facing apps.
           </p>
         </header>
 
-        <ul role="list" className="grid gap-10 md:grid-cols-2 mt-12">
+        <ul role="list" className="grid grid-cols-1 gap-10 md:grid-cols-2 mt-12">
           {projects.map((proj, idx) => (
             <li key={proj.slug}>
               <article
@@ -72,9 +69,7 @@ export default function Work() {
                       </Link>
                     </h3>
                     <p className="text-sm text-[#94a3b8]">{proj.type}</p>
-                    <p className="text-md text-[#cbd5e1] mt-2">
-                      {proj.description}
-                    </p>
+                    <p className="text-md text-[#cbd5e1] mt-2">{proj.description}</p>
                   </div>
 
                   <div className="flex flex-wrap gap-2 mt-4">

@@ -59,10 +59,17 @@ export default function Starfield({ starCount = 100 }) {
 
     draw();
 
-    const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
+const handleResize = () => {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+
+  // Re-generate stars for new canvas size
+  stars.forEach(star => {
+    star.x = Math.random() * width;
+    star.y = Math.random() * height;
+  });
+};
+
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);

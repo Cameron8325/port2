@@ -2,13 +2,15 @@ import React from "react";
 
 export default function SpaceMap() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 -20 360 400"
-      preserveAspectRatio="xMidYMid meet"
-      fill="none"
-      className="w-full h-full"
-    >
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 -20 360 400"
+  preserveAspectRatio="xMidYMid meet"
+  overflow="visible"
+  fill="none"
+  className="w-full h-full"
+>
+
       {/* 1. Define glow filter for halo ring (blur only, no solid edge) */}
       <defs>
         <filter id="glowRing" x="-50%" y="-50%" width="200%" height="200%">
