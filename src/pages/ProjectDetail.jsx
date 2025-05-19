@@ -33,7 +33,7 @@ export default function ProjectDetail() {
         id="project-content"
         role="main"
         aria-labelledby="project-title"
-        className="relative z-10 min-h-[calc(100vh-3rem)] px-4 sm:px-6 lg:px-8 pt-10 pb-16 overflow-visible"
+        className="relative z-10 min-h-[calc(100vh-3rem)] px-4 sm:px-6 lg:px-8 pt-6 pb-16 overflow-visible"
       >
         {/* Glow blob */}
         <div
