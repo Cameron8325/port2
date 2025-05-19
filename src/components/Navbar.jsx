@@ -19,8 +19,7 @@ export default function Navbar() {
         to="/"
         onClick={closeMenu}
         className={({ isActive }) =>
-          `${baseLinkStyle} ${hoverUnderline} ${
-            isActive ? activeLinkStyle : inactiveLinkStyle
+          `${baseLinkStyle} ${hoverUnderline} ${isActive ? activeLinkStyle : inactiveLinkStyle
           }`
         }
       >
@@ -30,8 +29,7 @@ export default function Navbar() {
         to="/work"
         onClick={closeMenu}
         className={({ isActive }) =>
-          `${baseLinkStyle} ${hoverUnderline} ${
-            isActive ? activeLinkStyle : inactiveLinkStyle
+          `${baseLinkStyle} ${hoverUnderline} ${isActive ? activeLinkStyle : inactiveLinkStyle
           }`
         }
       >
@@ -41,8 +39,7 @@ export default function Navbar() {
         to="/about"
         onClick={closeMenu}
         className={({ isActive }) =>
-          `${baseLinkStyle} ${hoverUnderline} ${
-            isActive ? activeLinkStyle : inactiveLinkStyle
+          `${baseLinkStyle} ${hoverUnderline} ${isActive ? activeLinkStyle : inactiveLinkStyle
           }`
         }
       >
@@ -52,8 +49,7 @@ export default function Navbar() {
         to="/contact"
         onClick={closeMenu}
         className={({ isActive }) =>
-          `${baseLinkStyle} ${hoverUnderline} ${
-            isActive ? activeLinkStyle : inactiveLinkStyle
+          `${baseLinkStyle} ${hoverUnderline} ${isActive ? activeLinkStyle : inactiveLinkStyle
           }`
         }
       >
@@ -66,13 +62,13 @@ export default function Navbar() {
     <header className="bg-[#0f172a] text-[#f1f5f9] sticky top-0 z-50 shadow-sm">
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
         {/* Logo / Name */}
-<Link
-  to="/"
-  aria-label="Go to home page"
-  className="text-2xl font-bold tracking-wide hover:text-[#14b8a6] transition-colors duration-200 focus:outline-none"
->
-  Cameron Smith
-</Link>
+        <Link
+          to="/"
+          aria-label="Go to home page"
+          className="text-2xl font-bold tracking-wide text-white hover:text-[#14b8a6] transition-colors duration-200 focus:outline-none visited:text-white active:text-white"
+        >
+          Cameron Smith
+        </Link>
 
 
         {/* Desktop nav */}
@@ -99,8 +95,7 @@ export default function Navbar() {
                 to={path}
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  `relative block text-center text-base font-medium transition-colors duration-200 focus:outline-none ${hoverUnderline} ${
-                    isActive ? activeLinkStyle : inactiveLinkStyle
+                  `relative block text-center text-base font-medium transition-colors duration-200 focus:outline-none ${hoverUnderline} ${isActive ? activeLinkStyle : inactiveLinkStyle
                   }`
                 }
               >
