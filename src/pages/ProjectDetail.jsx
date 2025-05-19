@@ -35,24 +35,22 @@ export default function ProjectDetail() {
         aria-labelledby="project-title"
         className="relative z-10 min-h-[calc(100vh-3rem)] px-4 sm:px-6 lg:px-8 pt-10 pb-16 overflow-visible"
       >
-        {/* Consistent decorative glow blob */}
+        {/* Glow blob */}
         <div
           className="absolute top-[-100px] right-[-150px] w-[400px] h-[400px] bg-[#00ffe0] opacity-20 blur-3xl rounded-full sm:w-[400px] sm:h-[400px]"
           aria-hidden="true"
         />
 
         <div className="max-w-4xl mx-auto space-y-10 text-[#e0e6ed]">
-          <Link to="/work" className="text-[#14b8a6] hover:underline">
-            ← Back to Projects
-          </Link>
-
-          <article className="space-y-6">
+          <article className="space-y-10">
             <header>
               <h2 id="project-title" className="text-3xl sm:text-4xl md:text-5xl font-bold">
                 {title}
               </h2>
-              <p className="text-sm sm:text-base text-[#94a3b8]">{type}</p>
-              <p className="text-sm sm:text-base text-[#94a3b8] italic">{status}</p>
+              <div className="mt-2 space-y-1 text-sm sm:text-base text-[#94a3b8]">
+                <p>{type}</p>
+                <p className="italic">{status}</p>
+              </div>
             </header>
 
             <img
@@ -75,7 +73,10 @@ export default function ProjectDetail() {
               </h3>
               <ul role="list" className="flex flex-wrap gap-2 sm:gap-3 mt-4">
                 {stack.map((tech, idx) => (
-                  <li key={idx} className="bg-[#0f172a] text-[#14b8a6] text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full">
+                  <li
+                    key={idx}
+                    className="bg-[#0f172a] text-[#14b8a6] text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full"
+                  >
                     {tech}
                   </li>
                 ))}
@@ -143,6 +144,13 @@ export default function ProjectDetail() {
               )}
             </section>
           </article>
+
+          {/* Footer with back link */}
+          <footer className="pt-8 border-t border-[#1e293b] mt-10">
+            <Link to="/work" className="text-[#14b8a6] hover:underline text-sm sm:text-base">
+              ← Back to Projects
+            </Link>
+          </footer>
         </div>
       </main>
     </>
