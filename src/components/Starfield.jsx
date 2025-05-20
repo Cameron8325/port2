@@ -6,8 +6,12 @@ export default function Starfield({ starCount = 100 }) {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
+
+    // Initialize dimensions
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
+    let prevWidth = width;
+    let prevHeight = height;
 
     function hexToRgba(hex, alpha) {
       const bigint = parseInt(hex.slice(1), 16);
@@ -17,6 +21,7 @@ export default function Starfield({ starCount = 100 }) {
       return `rgba(${r}, ${g}, ${b}, ${alpha})`;
     }
 
+    // Generate stars
     const stars = Array.from({ length: starCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
@@ -29,22 +34,31 @@ export default function Starfield({ starCount = 100 }) {
       color: Math.random() > 0.95 ? '#a78bfa' : '#ffffff'
     }));
 
+    // Draw loop
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
+
       stars.forEach((star) => {
+        // Move
         star.x += star.dx;
         star.y += star.dy;
 
+        // Wrap
         if (star.x < 0) star.x = width;
         if (star.x > width) star.x = 0;
         if (star.y < 0) star.y = height;
         if (star.y > height) star.y = 0;
 
+        // Twinkle
         star.phase += star.speed;
         const alpha = star.baseAlpha + Math.sin(star.phase) * 0.2;
         const clampedAlpha = Math.max(0, Math.min(1, alpha));
 
-        const gradient = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, star.radius * 1.5);
+        // Draw gradient star
+        const gradient = ctx.createRadialGradient(
+          star.x, star.y, 0,
+          star.x, star.y, star.radius * 1.5
+        );
         gradient.addColorStop(0, hexToRgba(star.color, clampedAlpha));
         gradient.addColorStop(1, 'rgba(255,255,255,0)');
 
@@ -59,20 +73,43 @@ export default function Starfield({ starCount = 100 }) {
 
     draw();
 
-const handleResize = () => {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
+    // Handle true resizes/orientation and ignore minor bounce resizes
+    const handleResize = () => {
+      const newW = window.innerWidth;
+      const newH = window.innerHeight;
 
-  // Re-generate stars for new canvas size
-  stars.forEach(star => {
-    star.x = Math.random() * width;
-    star.y = Math.random() * height;
-  });
-};
+      // If the resize is too small (mobile overscroll), just update canvas size
+      if (
+        Math.abs(newW - prevWidth) < 2 &&
+        Math.abs(newH - prevHeight) < 2
+      ) {
+        canvas.width = newW;
+        canvas.height = newH;
+        return;
+      }
 
+      // Genuine resize: compute scale and apply to stars
+      const scaleX = newW / prevWidth;
+      const scaleY = newH / prevHeight;
+
+      width = canvas.width = newW;
+      height = canvas.height = newH;
+
+      stars.forEach((star) => {
+        star.x *= scaleX;
+        star.y *= scaleY;
+      });
+
+      prevWidth = newW;
+      prevHeight = newH;
+    };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
   }, [starCount]);
 
   return (
