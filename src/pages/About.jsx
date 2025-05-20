@@ -35,7 +35,7 @@ export default function About() {
     "PostgreSQL",
     "REST APIs",
     "Stripe",
-    "AWS (S3, EC2)",
+    "AWS (Core Services)",
     "Git & GitHub",
   ];
 
