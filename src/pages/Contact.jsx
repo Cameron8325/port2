@@ -49,7 +49,7 @@ export default function Contact() {
               href="mailto:cameron8325@gmail.com"
               className="text-[#00ffe0] hover:underline"
             >
-              cameron8325@gmail.com
+              webdev.mcs@gmail.com
             </a>
           </p>
 
