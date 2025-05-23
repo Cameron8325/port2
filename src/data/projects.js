@@ -10,7 +10,7 @@ const projects = [
     type: "Client-Facing Application",
     image: artifex1,
     description: "Online appointment and loyalty system for a ceremonial tea business.",
-    stack: ["React", "Django", "PostgreSQL", "Material UI", "Django Email"],
+    stack: ["React", "Django", "PostgreSQL", "Material UI",],
     link: "#",
     code: "#",
     status: "In Development (Jun 2024 – Present)",
@@ -50,7 +50,6 @@ const projects = [
         "Side-by-side comparison view highlighting field-level edits for appointment change requests",
         "At-a-glance list and filter view of upcoming appointments by employee",
         "Billing and Reports module to generate revenue summaries by employee or time range",
-        "CSV and PDF export options for financial reports (planned)",
         "Email notifications for appointment confirmations and change approvals"
       ],
       future: "Add image attachment feature for inspiration photos, client history viewing, and implement report download functionality."
@@ -75,7 +74,7 @@ const projects = [
         "Call-to-action and contact form integration for lead generation",
         "Responsive design optimized for desktop and mobile devices"
       ],
-      future: "Replace placeholder CTAs with 'Your Project?' invitation to encourage new project inquiries."
+      future: "To keep coding! :)"
     }
   },
 {

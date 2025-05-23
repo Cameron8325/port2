@@ -146,7 +146,7 @@ export default function ProjectDetail() {
           </article>
 
           {/* Footer with back link */}
-          <footer className="pt-8 border-t border-[#1e293b] mt-10">
+          <footer className="pt-4 border-t border-[#1e293b] mt-10">
             <Link to="/work" className="text-[#14b8a6] hover:underline text-sm sm:text-base">
               ← Back to Projects
             </Link>
