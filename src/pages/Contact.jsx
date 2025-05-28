@@ -74,7 +74,7 @@ export default function Contact() {
 
           <div>
             <a
-              href="/Cameron_Smith_Resume.pdf"
+              href="/resume.pdf"
               className="inline-block border-2 border-[#14b8a6] text-[#14b8a6] text-base sm:text-lg font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-[#14b8a6] hover:text-[#0a0e1a] transition"
             >
               Download Resume
