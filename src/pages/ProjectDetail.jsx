@@ -19,9 +19,26 @@ export default function ProjectDetail() {
 
   const { title, image, type, description, stack, code, link, status, details } = project;
 
+  const variantClasses = {
+    live:      "text-[#00ffe0] bg-[#00ffe00d] hover:bg-[#00ffe033]",
+    details:   "text-[#c084fc] bg-[#c084fc0d] hover:bg-[#c084fc33]",
+    fe:        "text-[#f472b6] bg-[#f472b60d] hover:bg-[#f472b633]",
+    be:        "text-[#fcd34d] bg-[#fcd34d0d] hover:bg-[#fcd34d33]",
+    viewcode:  "text-[#38bdf8] bg-[#38bdf80d] hover:bg-[#38bdf833]",
+  };
+
+  const getIcon = (variant) => {
+    switch (variant) {
+      case 'fe': return '💻';
+      case 'be': return '⚙️';
+      case 'live': return '🔗';
+      case 'details': return '📖';
+      default: return '📂';
+    }
+  };
+
   return (
     <>
-      {/* Skip link for accessibility */}
       <a
         href="#project-content"
         className="sr-only focus:not-sr-only absolute top-2 left-2 z-20 p-2 bg-[#00ffe0] text-[#0a0e1a] rounded"
@@ -35,7 +52,6 @@ export default function ProjectDetail() {
         aria-labelledby="project-title"
         className="relative z-10 min-h-[calc(100vh-3rem)] px-4 sm:px-6 lg:px-8 pt-6 pb-16 overflow-visible"
       >
-        {/* Glow blob */}
         <div
           className="absolute top-[-100px] right-[-150px] w-[400px] h-[400px] bg-[#00ffe0] opacity-20 blur-3xl rounded-full sm:w-[400px] sm:h-[400px]"
           aria-hidden="true"
@@ -61,9 +77,7 @@ export default function ProjectDetail() {
             />
 
             <section aria-labelledby="description-heading">
-              <h3 id="description-heading" className="sr-only">
-                Description
-              </h3>
+              <h3 id="description-heading" className="sr-only">Description</h3>
               <p>{description}</p>
             </section>
 
@@ -85,9 +99,7 @@ export default function ProjectDetail() {
 
             {details && (
               <section aria-labelledby="details-heading">
-                <h3 id="details-heading" className="text-xl sm:text-2xl font-semibold">
-                  📖 Case Study
-                </h3>
+                <h3 id="details-heading" className="text-xl sm:text-2xl font-semibold">📖 Case Study</h3>
                 <div className="space-y-4 text-[#cbd5e1]">
                   {details.problem && (
                     <div>
@@ -121,31 +133,40 @@ export default function ProjectDetail() {
               </section>
             )}
 
-            <section className="flex flex-col sm:flex-row gap-4 mt-8">
-              {link && link !== '#' && (
-                <a
-                  href={link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-[#6366f1] text-white text-sm sm:text-base px-4 sm:px-5 py-2 rounded-lg hover:bg-[#4f46e5]"
-                >
-                  View Live
-                </a>
-              )}
-              {code && code !== '#' && (
-                <a
-                  href={code}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="border border-[#14b8a6] text-[#14b8a6] text-sm sm:text-base px-4 sm:px-5 py-2 rounded-lg hover:bg-[#14b8a6] hover:text-white"
-                >
-                  View Code
-                </a>
-              )}
-            </section>
+            {(link || (Array.isArray(code) && code.length > 0)) && (
+              <section className="mt-12">
+                <h4 className="text-[#94a3b8] text-sm uppercase mb-4 tracking-widest">Resources</h4>
+                <div className="flex flex-wrap gap-3">
+                  {link && link !== '#' && (
+                    <a
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex items-center gap-2 text-sm font-medium px-4 py-1.5 rounded-full transition ${variantClasses.live}`}
+                    >
+                      🔗 <span>Live Site</span>
+                    </a>
+                  )}
+                  {Array.isArray(code) && code.length > 0 &&
+                    code.map(({ label, url, variant }, idx) => (
+                      <a
+                        key={idx}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`inline-flex items-center gap-2 text-sm font-medium px-4 py-1.5 rounded-full transition ${
+                          variantClasses[variant] || variantClasses.viewcode
+                        }`}
+                      >
+                        {getIcon(variant)} <span>{label}</span>
+                      </a>
+                    ))
+                  }
+                </div>
+              </section>
+            )}
           </article>
 
-          {/* Footer with back link */}
           <footer className="pt-4 border-t border-[#1e293b] mt-10">
             <Link to="/work" className="text-[#14b8a6] hover:underline text-sm sm:text-base">
               ← Back to Projects
