@@ -17,7 +17,7 @@
   animation: fade-up 0.6s ease-out forwards;
 }
 
-.tooltip-show {
+.tooltip-show, .tooltip-hover {
   opacity: 1 !important;
   transform: scale(1) !important;
   transition: all 0.3s ease-in-out;
