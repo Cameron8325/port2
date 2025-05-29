@@ -11,14 +11,13 @@ const projects = [
     image: artifex1,
     description: "Online appointment and loyalty system for a ceremonial tea business.",
     stack: ["React", "Django", "PostgreSQL", "Material UI"],
-    liveUrl: "#",
     code: [
-      { label: "Frontend", url: "#", variant: "fe" },
-      { label: "Backend", url: "#", variant: "be" }
+      { label: "Frontend", url: "https://github.com/Cameron8325/SchedAppFE", variant: "fe" },
+      { label: "Backend", url: "https://github.com/Cameron8325/SchedAppBE", variant: "be" }
     ],
     ctas: [
-      { label: "Case Study",    url: "/work/artifex-scheduler", variant: "details" },
-      { label: "Live Preview",  url: "#",                     variant: "live"    }
+      { label: "Case Study", url: "/work/artifex-scheduler", variant: "details" },
+      { label: "Live Preview", url: "#", variant: "live" }
     ],
     status: "In Development (Jun 2024 – Present)",
     details: {
@@ -44,14 +43,13 @@ const projects = [
     image: imagine1,
     description: "Centralized scheduling and billing system for a tattoo shop in Capon Bridge, WV.",
     stack: ["React", "Django", "PostgreSQL", "Material UI"],
-    liveUrl: "#",
     code: [
-      { label: "Frontend", url: "#", variant: "fe" },
-      { label: "Backend", url: "#", variant: "be" }
+      { label: "Frontend", url: "https://github.com/Cameron8325/TattooAppFE", variant: "fe" },
+      { label: "Backend", url: "https://github.com/Cameron8325/TattooAppointmentAppBE", variant: "be" }
     ],
     ctas: [
-      { label: "Case Study",    url: "/work/internal-app-scheduler", variant: "details" },
-      { label: "Live Preview",  url: "#",                           variant: "live"   }
+      { label: "Case Study", url: "/work/internal-app-scheduler", variant: "details" },
+      { label: "Live Preview", url: "#", variant: "live" }
     ],
     status: "In Development (Feb 2025 – Present)",
     details: {
@@ -76,13 +74,12 @@ const projects = [
     image: nelson,
     description: "Responsive portfolio site showcasing professional services for an insurance consultant.",
     stack: ["React", "Styled-Components", "Parallax.js", "React Router"],
-    liveUrl: "#",
     code: [
-      { label: "Frontend", url: "#", variant: "fe" }
+      { label: "Frontend", url: "https://github.com/Cameron8325/brettport", variant: "fe" }
     ],
     ctas: [
-      { label: "Case Study",    url: "/work/brett-nelson-portfolio", variant: "details" },
-      { label: "Live Preview",  url: "#",                             variant: "live"   }
+      { label: "Case Study", url: "/work/brett-nelson-portfolio", variant: "details" },
+      { label: "Live Preview", url: "https://brettnelson.netlify.app/", variant: "live" }
     ],
     status: "Live (Nov 2024)",
     details: {
@@ -110,8 +107,8 @@ const projects = [
       { label: "Backend", url: "#", variant: "be" }
     ],
     ctas: [
-      { label: "Case Study",    url: "/work/your-project", variant: "details" },
-      { label: "Live Preview",  url: "mailto:youremail@example.com",   variant: "live"   }
+      { label: "Case Study", url: "/work/your-project", variant: "details" },
+      { label: "Live Preview", url: "mailto:youremail@example.com", variant: "live" }
     ],
     status: "Open to Freelance, Collaboration, or Full-Time",
     details: {
