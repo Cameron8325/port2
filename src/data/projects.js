@@ -87,7 +87,7 @@ const projects = [
       solution: "Designed and developed a single-page React application with styled components and parallax effects to highlight services and drive user engagement.",
       features: [
         "Custom parallax scrolling sections to enhance visual storytelling",
-        "Reusable styled-components for consistent theming and dark mode support",
+        "Reusable styled-components for consistent theming",
         "Call-to-action and contact form integration for lead generation",
         "Responsive design optimized for desktop and mobile devices"
       ],
@@ -102,13 +102,13 @@ const projects = [
     description: "Whether you’re starting from scratch or need help untangling a tricky problem, I help turn ideas into intuitive, scalable web applications — no jargon, just solutions.",
     stack: ["JavaScript", "React", "Django", "Python", "Material UI", "AWS (Core Services)"],
     liveUrl: "mailto:youremail@example.com",
-    code: [
-      { label: "Frontend", url: "#", variant: "fe" },
-      { label: "Backend", url: "#", variant: "be" }
-    ],
+    // code: [
+    //   { label: "Frontend", url: "#", variant: "fe" },
+    //   { label: "Backend", url: "#", variant: "be" }
+    // ],
     ctas: [
       { label: "Case Study", url: "/work/your-project", variant: "details" },
-      { label: "Live Preview", url: "mailto:youremail@example.com", variant: "live" }
+      { label: "Contact Me", url: "/contact", variant: "live" }
     ],
     status: "Open to Freelance, Collaboration, or Full-Time",
     details: {
