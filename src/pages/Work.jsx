@@ -1,15 +1,15 @@
-import React from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import projects from '../data/projects';
 import useScrollReveal from '../hooks/useScrollReveal';
 
 export default function Work() {
   const [sectionRef, isVisible] = useScrollReveal();
-  const [openDropdownSlug, setOpenDropdownSlug] = React.useState(null);
-  const panelRefs = React.useRef({}); // To track each dropdown panel/button
+  const [openDropdownSlug, setOpenDropdownSlug] = useState(null);
+  const panelRefs = useRef({}); // To track each dropdown panel/button
 
   // Listen for outside click to close dropdown
-  React.useEffect(() => {
+  useEffect(() => {
     function handleClickOutside(event) {
       if (!openDropdownSlug) return;
       const currentPanel = panelRefs.current[openDropdownSlug];
@@ -27,10 +27,10 @@ export default function Work() {
 
   //Shout out to Erica and Abby for helping with the colors
   const variantClasses = {
-    live:    "text-[#00ffe0] hover:underline", // aqua/cyan
+    live: "text-[#00ffe0] hover:underline", // aqua/cyan
     details: "text-[#c084fc] hover:underline", // purple (Case Study)
-    fe:      "text-[#f472b6] hover:underline", // pink (Frontend)
-    be:      "text-[#fcd34d] hover:underline", // yellow (Backend)
+    fe: "text-[#f472b6] hover:underline", // pink (Frontend)
+    be: "text-[#fcd34d] hover:underline", // yellow (Backend)
     viewcode: "text-[#38bdf8] hover:underline", // blue (View Code)
   };
 
@@ -63,9 +63,8 @@ export default function Work() {
 
         <header
           id="work-heading"
-          className={`text-center space-y-4 transition-opacity duration-700 ${
-            isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'
-          }`}
+          className={`text-center space-y-4 transition-opacity duration-700 ${isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'
+            }`}
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold">💼 Work</h2>
           <p className="text-base sm:text-lg text-[#94a3b8]">
@@ -87,9 +86,8 @@ export default function Work() {
                 <article
                   aria-labelledby={`project-title-${proj.slug}`}
                   style={{ animationDelay: `${idx * 100}ms` }}
-                  className={`group bg-white/5 backdrop-blur-sm ring-1 ring-white/10 rounded-xl overflow-hidden transition-transform duration-300 hover:scale-[1.015] hover:ring-[#00ffe0] hover:ring-2 flex flex-col h-full min-h-[460px] ${
-                    isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'
-                  }`}
+                  className={`group bg-white/5 backdrop-blur-sm ring-1 ring-white/10 rounded-xl overflow-hidden transition-transform duration-300 hover:scale-[1.015] hover:ring-[#00ffe0] hover:ring-2 flex flex-col h-full min-h-[460px] ${isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'
+                    }`}
                 >
                   {/* Image wrapper clips overflow */}
                   <div className="overflow-hidden rounded-t-xl">
@@ -134,15 +132,33 @@ export default function Work() {
                       <div className="flex gap-4 items-center flex-wrap relative">
                         {/* Live Preview */}
                         {liveCta && (
-                          <a
-                            href={liveCta.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`text-sm font-medium ${variantClasses.live}`}
-                          >
-                            {liveCta.label}
-                          </a>
+                          proj.slug === "your-project" ? (
+                            <Link
+                              to={liveCta.url}
+                              className={`text-sm font-medium ${variantClasses.live}`}
+                            >
+                              {liveCta.label}
+                            </Link>
+                          ) : liveCta.url === "#" ? (
+                            <span className="relative group cursor-not-allowed text-sm font-medium text-[#00ffe0]">
+                              {liveCta.label}
+                              <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                                Coming soon!
+                              </span>
+                            </span>
+                          ) : (
+                            <a
+                              href={liveCta.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`text-sm font-medium ${variantClasses.live}`}
+                            >
+                              {liveCta.label}
+                            </a>
+                          )
                         )}
+
+
                         {/* Case Study */}
                         {detailsCta && (
                           <Link

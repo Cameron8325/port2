@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function SpaceMap() {
   const handleHover = (e, action) => {
     const tooltip = e.currentTarget.querySelector('.tooltip');
