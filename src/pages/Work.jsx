@@ -6,9 +6,8 @@ import useScrollReveal from '../hooks/useScrollReveal';
 export default function Work() {
   const [sectionRef, isVisible] = useScrollReveal();
   const [openDropdownSlug, setOpenDropdownSlug] = useState(null);
-  const panelRefs = useRef({}); // To track each dropdown panel/button
+  const panelRefs = useRef({});
 
-  // Listen for outside click to close dropdown
   useEffect(() => {
     function handleClickOutside(event) {
       if (!openDropdownSlug) return;
@@ -25,13 +24,12 @@ export default function Work() {
     };
   }, [openDropdownSlug]);
 
-  //Shout out to Erica and Abby for helping with the colors
   const variantClasses = {
-    live: "text-[#00ffe0] hover:underline", // aqua/cyan
-    details: "text-[#c084fc] hover:underline", // purple (Case Study)
-    fe: "text-[#f472b6] hover:underline", // pink (Frontend)
-    be: "text-[#fcd34d] hover:underline", // yellow (Backend)
-    viewcode: "text-[#38bdf8] hover:underline", // blue (View Code)
+    live:    "text-[#00ffe0] hover:underline",
+    details: "text-[#c084fc] hover:underline",
+    fe:      "text-[#f472b6] hover:underline",
+    be:      "text-[#fcd34d] hover:underline",
+    viewcode:"text-[#38bdf8] hover:underline",
   };
 
   function handleDropdownClick(slug) {
@@ -40,7 +38,6 @@ export default function Work() {
 
   return (
     <>
-      {/* Skip link for accessibility */}
       <a
         href="#work-content"
         className="sr-only focus:not-sr-only absolute top-2 left-2 z-20 p-2 bg-[#00ffe0] text-[#0a0e1a] rounded"
@@ -55,7 +52,6 @@ export default function Work() {
         ref={sectionRef}
         className="relative z-10 min-h-[calc(100vh-3rem)] px-4 sm:px-6 lg:px-8 pt-6 pb-16 overflow-visible"
       >
-        {/* Decorative glow blob */}
         <div
           className="absolute top-[-100px] right-[-150px] w-[400px] h-[400px] bg-[#00ffe0] opacity-20 blur-3xl rounded-full sm:h-[400px]"
           aria-hidden="true"
@@ -63,8 +59,7 @@ export default function Work() {
 
         <header
           id="work-heading"
-          className={`text-center space-y-4 transition-opacity duration-700 ${isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'
-            }`}
+          className={`text-center space-y-4 transition-opacity duration-700 ${isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'}`}
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold">💼 Work</h2>
           <p className="text-base sm:text-lg text-[#94a3b8]">
@@ -74,29 +69,32 @@ export default function Work() {
 
         <ul role="list" className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-12">
           {projects.map((proj, idx) => {
-            const liveCta = proj.ctas.find(c => c.variant === 'live');
-            const detailsCta = proj.ctas.find(c => c.variant === 'details');
-            const isOpen = openDropdownSlug === proj.slug;
-            const hasMultiCode = proj.code && proj.code.length > 1;
-            const singleCode = proj.code && proj.code.length === 1 ? proj.code[0] : null;
+            const liveCta       = proj.ctas.find(c => c.variant === 'live');
+            const detailsCta    = proj.ctas.find(c => c.variant === 'details');
+            const isOpen        = openDropdownSlug === proj.slug;
+            const hasMultiCode  = proj.code && proj.code.length > 1;
+            const singleCode    = proj.code && proj.code.length === 1 ? proj.code[0] : null;
 
-            // For outside click: attach a ref to the container holding the CTAs & the dropdown
             return (
               <li key={proj.slug} className="relative h-full">
                 <article
                   aria-labelledby={`project-title-${proj.slug}`}
                   style={{ animationDelay: `${idx * 100}ms` }}
-                  className={`group bg-white/5 backdrop-blur-sm ring-1 ring-white/10 rounded-xl overflow-hidden transition-transform duration-300 hover:scale-[1.015] hover:ring-[#00ffe0] hover:ring-2 flex flex-col h-full min-h-[460px] ${isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'
-                    }`}
+                  className={`group bg-white/5 backdrop-blur-sm ring-1 ring-white/10 rounded-xl overflow-hidden transition-transform duration-300 hover:scale-[1.015] hover:ring-[#00ffe0] hover:ring-2 flex flex-col h-full min-h-[460px] ${isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'}`}
                 >
-                  {/* Image wrapper clips overflow */}
                   <div className="overflow-hidden rounded-t-xl">
-                    <img
-                      src={proj.image}
-                      alt={proj.title}
-                      loading="lazy"
-                      className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
+                    <picture>
+                      <source srcSet={proj.image} type="image/webp" />
+                      <img
+                        src={proj.image}
+                        alt={proj.title}
+                        className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                        width={640}
+                        height={224}
+                        loading={idx === 0 ? 'eager' : 'lazy'}
+                        decoding="async"
+                      />
+                    </picture>
                   </div>
 
                   <div className="p-6 flex-1 flex flex-col justify-between">
@@ -121,25 +119,19 @@ export default function Work() {
                       ))}
                     </div>
 
-                    {/* CTAs row always in-line */}
                     <div
                       className="mt-6"
                       ref={el => {
-                        // Save a reference for outside click
-                        if (panelRefs.current) panelRefs.current[proj.slug] = el;
+                        panelRefs.current[proj.slug] = el;
                       }}
                     >
                       <div className="flex gap-4 items-center flex-wrap relative">
-                        {/* Live Preview */}
                         {liveCta && (
-                          proj.slug === "your-project" ? (
-                            <Link
-                              to={liveCta.url}
-                              className={`text-sm font-medium ${variantClasses.live}`}
-                            >
+                          proj.slug === 'your-project' ? (
+                            <Link to={liveCta.url} className={`text-sm font-medium ${variantClasses.live}`}>
                               {liveCta.label}
                             </Link>
-                          ) : liveCta.url === "#" ? (
+                          ) : liveCta.url === '#' ? (
                             <span className="relative group cursor-not-allowed text-sm font-medium text-[#00ffe0]">
                               {liveCta.label}
                               <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
@@ -158,69 +150,47 @@ export default function Work() {
                           )
                         )}
 
-
-                        {/* Case Study */}
                         {detailsCta && (
-                          <Link
-                            to={detailsCta.url}
-                            className={`text-sm font-medium ${variantClasses.details}`}
-                          >
+                          <Link to={detailsCta.url} className={`text-sm font-medium ${variantClasses.details}`}>
                             {detailsCta.label}
                           </Link>
                         )}
-                        {/* View Code */}
+
                         {hasMultiCode ? (
                           <>
-                            {/* Desktop: Slide-out inline links */}
-                            <div className="hidden sm:flex items-center relative">
-                              <button
-                                type="button"
-                                onClick={() => handleDropdownClick(proj.slug)}
-                                className={`inline-flex items-center text-sm font-medium ${variantClasses.viewcode}`}
-                                aria-haspopup="true"
-                                aria-expanded={isOpen}
-                                tabIndex={0}
-                              >
-                                View Code
-                                <span className="ml-1 select-none">▸</span>
-                              </button>
-                              <div
-                                className="flex items-center transition-all duration-300 ease-in-out"
-                                style={{
-                                  maxWidth: isOpen ? '400px' : '0px',
-                                  opacity: isOpen ? 1 : 0,
-                                  overflow: 'hidden',
-                                  marginLeft: isOpen ? '12px' : '0px',
-                                }}
-                                aria-hidden={!isOpen}
-                              >
-                                {isOpen &&
-                                  proj.code.map(({ label, url, variant }) => (
-                                    <a
-                                      key={label}
-                                      href={url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className={`ml-4 text-sm font-medium whitespace-nowrap ${variantClasses[variant]} hover:underline`}
-                                      tabIndex={isOpen ? 0 : -1}
-                                    >
-                                      {label}
-                                    </a>
-                                  ))}
-                              </div>
-                            </div>
-                            {/* Mobile: Button only in row, panel below */}
-                            <div className="block sm:hidden">
-                              <button
-                                type="button"
-                                onClick={() => handleDropdownClick(proj.slug)}
-                                className={`inline-flex items-center text-sm font-medium ${variantClasses.viewcode}`}
-                                aria-haspopup="true"
-                                aria-expanded={isOpen}
-                              >
-                                View Code
-                                <span className="ml-1 select-none">▾</span>
-                              </button>
+                            <button
+                              type="button"
+                              onClick={() => handleDropdownClick(proj.slug)}
+                              className={`inline-flex items-center text-sm font-medium ${variantClasses.viewcode}`}
+                              aria-haspopup="true"
+                              aria-expanded={isOpen}
+                            >
+                              View Code
+                              <span className="ml-1 select-none">▸</span>
+                            </button>
+                            <div
+                              className="flex flex-wrap transition-all duration-300 ease-in-out"
+                              style={{
+                                maxWidth: isOpen ? '400px' : '0px',
+                                opacity: isOpen ? 1 : 0,
+                                overflow: 'hidden',
+                                marginLeft: isOpen ? '12px' : '0px',
+                              }}
+                              aria-hidden={!isOpen}
+                            >
+                              {isOpen &&
+                                proj.code.map(({ label, url, variant }) => (
+                                  <a
+                                    key={label}
+                                    href={url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={`ml-4 text-sm font-medium whitespace-nowrap ${variantClasses[variant]} hover:underline`}
+                                    tabIndex={isOpen ? 0 : -1}
+                                  >
+                                    {label}
+                                  </a>
+                                ))}
                             </div>
                           </>
                         ) : singleCode ? (
@@ -234,27 +204,6 @@ export default function Work() {
                           </a>
                         ) : null}
                       </div>
-
-                      {/* Mobile: FE/BE panel below all CTAs, stacked and centered */}
-                      {hasMultiCode && (
-                        <div className={`sm:hidden w-full transition-[max-height] duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-40 mt-4' : 'max-h-0'}`}>
-                          {isOpen && (
-                            <div className="w-full bg-[#111827] rounded-md shadow-lg ring-1 ring-black ring-opacity-20 px-4 py-3 flex flex-col items-center gap-2">
-                              {proj.code.map(({ label, url, variant }) => (
-                                <a
-                                  key={label}
-                                  href={url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className={`text-sm font-medium ${variantClasses[variant]} hover:underline`}
-                                >
-                                  {label}
-                                </a>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      )}
                     </div>
                   </div>
                 </article>

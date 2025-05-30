@@ -1,14 +1,9 @@
-import artifex1 from "../assets/artifex1.jpg";
-import imagine1 from "../assets/imagine1.jpg";
-import nelson from "../assets/nelson.png";
-import yourproj from "../assets/yourproj.png"
-
 const projects = [
   {
     title: "Ceremonial Artifex Scheduler",
     slug: "artifex-scheduler",
     type: "Client-Facing Application",
-    image: artifex1,
+    image: "/artifex1.webp",
     description: "Online appointment and loyalty system for a ceremonial tea business.",
     stack: ["React", "Django", "PostgreSQL", "Material UI"],
     code: [
@@ -40,7 +35,7 @@ const projects = [
     title: "Imaginarium Internal App Scheduler",
     slug: "internal-app-scheduler",
     type: "Employee-Facing Application",
-    image: imagine1,
+    image: "/imagine1.webp",
     description: "Centralized scheduling and billing system for a tattoo shop in Capon Bridge, WV.",
     stack: ["React", "Django", "PostgreSQL", "Material UI"],
     code: [
@@ -71,7 +66,7 @@ const projects = [
     title: "Brett Nelson Portfolio",
     slug: "brett-nelson-portfolio",
     type: "Portfolio Website",
-    image: nelson,
+    image: "/nelson.webp",
     description: "Responsive portfolio site showcasing professional services for an insurance consultant.",
     stack: ["React", "Styled-Components", "Parallax.js", "React Router"],
     code: [
@@ -98,14 +93,10 @@ const projects = [
     title: "Your Project?",
     slug: "your-project",
     type: "Let’s Collaborate",
-    image: yourproj,
+    image: "/yourproj.webp",
     description: "Whether you’re starting from scratch or need help untangling a tricky problem, I help turn ideas into intuitive, scalable web applications — no jargon, just solutions.",
     stack: ["JavaScript", "React", "Django", "Python", "Material UI", "AWS (Core Services)"],
     liveUrl: "mailto:youremail@example.com",
-    // code: [
-    //   { label: "Frontend", url: "#", variant: "fe" },
-    //   { label: "Backend", url: "#", variant: "be" }
-    // ],
     ctas: [
       { label: "Case Study", url: "/work/your-project", variant: "details" },
       { label: "Contact Me", url: "/contact", variant: "live" }
