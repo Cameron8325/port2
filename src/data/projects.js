@@ -1,7 +1,7 @@
 import artifex1 from "../assets/artifex1.jpg";
 import imagine1 from "../assets/imagine1.jpg";
 import nelson from "../assets/nelson.png";
-// import ctaImage from "../assets/cta.png"; // TODO: replace with actual CTA graphic
+import yourproj from "../assets/yourproj.png"
 
 const projects = [
   {
@@ -98,7 +98,7 @@ const projects = [
     title: "Your Project?",
     slug: "your-project",
     type: "Let’s Collaborate",
-    image: "https://placehold.co/600x400?text=Your+Project",
+    image: yourproj,
     description: "Whether you’re starting from scratch or need help untangling a tricky problem, I help turn ideas into intuitive, scalable web applications — no jargon, just solutions.",
     stack: ["JavaScript", "React", "Django", "Python", "Material UI", "AWS (Core Services)"],
     liveUrl: "mailto:youremail@example.com",
