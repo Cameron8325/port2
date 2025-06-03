@@ -6,23 +6,45 @@ import useScrollReveal from '../hooks/useScrollReveal';
 export default function Work() {
   const [sectionRef, isVisible] = useScrollReveal();
   const [openDropdownSlug, setOpenDropdownSlug] = useState(null);
+  const [tappedComingSoon, setTappedComingSoon] = useState(null);
   const panelRefs = useRef({});
+  const tooltipRefs = useRef({});
 
+  // Close "View Code" dropdown when clicking/tapping outside
   useEffect(() => {
-    function handleClickOutside(event) {
+    function handleClickOutsideDropdown(event) {
       if (!openDropdownSlug) return;
       const currentPanel = panelRefs.current[openDropdownSlug];
       if (currentPanel && !currentPanel.contains(event.target)) {
         setOpenDropdownSlug(null);
       }
     }
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
+
+    document.addEventListener('mousedown', handleClickOutsideDropdown);
+    document.addEventListener('touchstart', handleClickOutsideDropdown);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutsideDropdown);
+      document.removeEventListener('touchstart', handleClickOutsideDropdown);
     };
   }, [openDropdownSlug]);
+
+  // Close "Coming Soon" tooltip on mobile when clicking/tapping outside
+  useEffect(() => {
+    function handleClickOutsideTooltip(event) {
+      if (!tappedComingSoon) return;
+      const currentTooltip = tooltipRefs.current[tappedComingSoon];
+      if (currentTooltip && !currentTooltip.contains(event.target)) {
+        setTappedComingSoon(null);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutsideTooltip);
+    document.addEventListener('touchstart', handleClickOutsideTooltip);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutsideTooltip);
+      document.removeEventListener('touchstart', handleClickOutsideTooltip);
+    };
+  }, [tappedComingSoon]);
 
   const variantClasses = {
     live:    "text-[#00ffe0] hover:underline",
@@ -59,7 +81,9 @@ export default function Work() {
 
         <header
           id="work-heading"
-          className={`text-center space-y-4 transition-opacity duration-700 ${isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'}`}
+          className={`text-center space-y-4 transition-opacity duration-700 ${
+            isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'
+          }`}
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold">💼 Work</h2>
           <p className="text-base sm:text-lg text-[#94a3b8]">
@@ -80,7 +104,9 @@ export default function Work() {
                 <article
                   aria-labelledby={`project-title-${proj.slug}`}
                   style={{ animationDelay: `${idx * 100}ms` }}
-                  className={`group bg-white/5 backdrop-blur-sm ring-1 ring-white/10 rounded-xl overflow-hidden transition-transform duration-300 hover:scale-[1.015] hover:ring-[#00ffe0] hover:ring-2 flex flex-col h-full min-h-[460px] ${isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'}`}
+                  className={`group bg-white/5 backdrop-blur-sm ring-1 ring-white/10 rounded-xl overflow-hidden transition-transform duration-300 hover:scale-[1.015] hover:ring-[#00ffe0] hover:ring-2 flex flex-col h-full min-h-[460px] ${
+                    isVisible ? 'animate-fade-up opacity-100' : 'opacity-0'
+                  }`}
                 >
                   <div className="overflow-hidden rounded-t-xl">
                     <picture>
@@ -119,6 +145,7 @@ export default function Work() {
                       ))}
                     </div>
 
+                    {/* ══════════════════════ Dropdown & CTAs Container ══════════════════════ */}
                     <div
                       className="mt-6"
                       ref={el => {
@@ -132,9 +159,29 @@ export default function Work() {
                               {liveCta.label}
                             </Link>
                           ) : liveCta.url === '#' ? (
-                            <span className="relative group cursor-not-allowed text-sm font-medium text-[#00ffe0]">
+                            // "Live Preview" with hover-on-desktop + tap-on-mobile tooltip
+                            <span
+                              ref={el => {
+                                tooltipRefs.current[proj.slug] = el;
+                              }}
+                              className="relative peer cursor-pointer text-sm font-medium text-[#00ffe0]"
+                              onClick={() =>
+                                setTappedComingSoon(
+                                  tappedComingSoon === proj.slug ? null : proj.slug
+                                )
+                              }
+                            >
                               {liveCta.label}
-                              <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                              <span
+                                className={`
+                                  absolute bottom-full left-1/2 
+                                  transform -translate-x-1/2 mb-2 w-max px-2 py-1 text-xs text-white bg-black rounded
+                                  transition-opacity duration-200
+                                  opacity-0 pointer-events-none
+                                  md:peer-hover:opacity-100 md:peer-hover:pointer-events-auto
+                                  ${tappedComingSoon === proj.slug ? 'opacity-100 pointer-events-auto' : ''}
+                                `}
+                              >
                                 Coming soon!
                               </span>
                             </span>
@@ -166,31 +213,54 @@ export default function Work() {
                               aria-expanded={isOpen}
                             >
                               View Code
-                              <span className="ml-1 select-none">▸</span>
+                              <span className="ml-1 select-none">
+                                <span className="md:hidden">▾</span>
+                                <span className="hidden md:inline">▸</span>
+                              </span>
                             </button>
+
+                            {/* ───────── Mobile Dropdown (under md) ───────── */}
                             <div
-                              className="flex flex-wrap transition-all duration-300 ease-in-out"
-                              style={{
-                                maxWidth: isOpen ? '400px' : '0px',
-                                opacity: isOpen ? 1 : 0,
-                                overflow: 'hidden',
-                                marginLeft: isOpen ? '12px' : '0px',
-                              }}
+                              className={`md:hidden transition-[max-height,opacity] duration-300 ease-in-out overflow-hidden ${
+                                isOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                              } w-full`}
                               aria-hidden={!isOpen}
                             >
-                              {isOpen &&
-                                proj.code.map(({ label, url, variant }) => (
+                              <div className="flex flex-col items-center space-y-2 mt-4">
+                                {proj.code.map(({ label, url, variant }) => (
                                   <a
                                     key={label}
                                     href={url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className={`ml-4 text-sm font-medium whitespace-nowrap ${variantClasses[variant]} hover:underline`}
+                                    className={`text-sm font-medium ${variantClasses[variant]} hover:underline`}
                                     tabIndex={isOpen ? 0 : -1}
                                   >
                                     {label}
                                   </a>
                                 ))}
+                              </div>
+                            </div>
+
+                            {/* ───────── Desktop Dropdown (md and up) ───────── */}
+                            <div
+                              className={`hidden md:flex items-center transition-[max-width,opacity,margin-left] duration-300 ease-in-out overflow-hidden ${
+                                isOpen ? 'max-w-[400px] opacity-100 ml-3' : 'max-w-0 opacity-0 ml-0'
+                              }`}
+                              aria-hidden={!isOpen}
+                            >
+                              {proj.code.map(({ label, url, variant }) => (
+                                <a
+                                  key={label}
+                                  href={url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className={`ml-4 text-sm font-medium whitespace-nowrap ${variantClasses[variant]} hover:underline`}
+                                  tabIndex={isOpen ? 0 : -1}
+                                >
+                                  {label}
+                                </a>
+                              ))}
                             </div>
                           </>
                         ) : singleCode ? (
@@ -205,6 +275,7 @@ export default function Work() {
                         ) : null}
                       </div>
                     </div>
+                    {/* ═════════════════ End Dropdown & CTAs ═════════════════ */}
                   </div>
                 </article>
               </li>
