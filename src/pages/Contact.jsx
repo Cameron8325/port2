@@ -24,7 +24,7 @@ export default function Contact() {
     setStatus('Sending...');
 
     try {
-      const res = await fetch('https://your-api-endpoint.amazonaws.com/prod/contact', {
+      const res = await fetch('https://hmlsdyoo9a.execute-api.us-east-1.amazonaws.com/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
